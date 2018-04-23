@@ -1,0 +1,2 @@
+Para rodar os testes entrar no diretório
+cadastro\application\tests no console e rodar phpunit, o resultado formatado se encontra na pasta cadastro\application\tests\build\coverage no arquivo controllers_Cadastro.php.html 
