@@ -41,12 +41,12 @@ class Paciente_model extends CI_Model
     /*
      * Obter todos os pacientes
      */
-    function listar_pacientes($params = array())
+    function listar_pacientes()
     {
         $this->db->order_by('id', 'desc');
-        if (isset($params) && ! empty($params)) {
+        /*if (isset($params) && ! empty($params)) {
             $this->db->limit($params['limit'], $params['offset']);
-        }
+        }*/
         return $this->db->get('paciente')->result();
     }
 
