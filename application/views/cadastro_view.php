@@ -10,28 +10,19 @@
 <link href="<?php echo base_url('assets/css/jquery-ui.min.css')?>" rel="stylesheet">
 <link href="<?php echo base_url('assets/css/jquery-ui.theme.min.css')?>" rel="stylesheet">
 
-
 <script src="<?php echo base_url('assets/jquery/jquery-3.1.0.min.js')?>"></script>
 <script src="<?php echo base_url('assets/jquery/jquery-ui.min.js')?>"></script>
 <script src="<?php echo base_url('assets/bootstrap/js/bootstrap.min.js')?>"></script>
 <script src="<?php echo base_url('assets/datatables/js/jquery.dataTables.min.js')?>"></script>
 <script src="<?php echo base_url('assets/datatables/js/dataTables.bootstrap.js')?>"></script>
-<script src="<?php echo base_url();?>assets/js/arquivo.js"></script>	
-<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+<script src="<?php echo base_url();?>assets/js/arquivo.js"></script>
 </head>
 <body>
-
-
 	<div class="container">
 		</center>
 		<h3>Cadastro Paciente</h3>
 		<br />
-		<button class="btn btn-success" onclick="add_paciente()">
+		<button class="btn btn-success" onclick="adicionar_paciente()">
 			<i class="glyphicon glyphicon-plus"></i> Incluir
 		</button>
 		<br /> <br />
@@ -56,14 +47,14 @@
 					<td><?php echo $p->nome_mae; ?></td>
 					<td><?php echo $p->nome_pai; ?></td>
 					<td><?php echo $p->email; ?></td>
-					<td><?php echo $p->status; ?></td>
+					<td><?php echo $p->status==1?'Ativo':'Inativo'; ?></td>
 					<td>
 						<button class="btn btn-warning"
 							onclick="editar_paciente(<?php echo $p->id;?>)">
 							<i class="glyphicon glyphicon-pencil"></i>
 						</button>
 						<button class="btn btn-danger"
-							onclick="delete_book(<?php echo $p->id;?>)">
+							onclick="deletar_paciente(<?php echo $p->id;?>)">
 							<i class="glyphicon glyphicon-remove"></i>
 						</button>
 					</td>
@@ -72,11 +63,6 @@
       </tbody>
 		</table>
 	</div>
-
-
 <?php require_once 'modal_crud.php'; ?>
-
-
-
 </body>
 </html>

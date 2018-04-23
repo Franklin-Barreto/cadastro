@@ -30,6 +30,9 @@ class Cadastro extends CI_Controller
         parent::__construct();
         $this->load->helper('url');
         $this->load->model('Paciente_model');
+        $this->load->model('Endereco_model');
+        $this->load->library('form_validation');
+        $this->load->library('session');
     }
 
     public function index()
@@ -49,19 +52,83 @@ class Cadastro extends CI_Controller
 
     public function adicionarPaciente()
     {
-        $data = array(
-            'nome' => $this->input->post('nome'),
-            'nome_mae' => $this->input->post('nome_mae'),
-            'nome_pai' => $this->input->post('nome_pai'),
-            'book_category' => $this->input->post('book_category'),
-        );
-        $insert = $this->book_model->book_add($data);
-        echo json_encode(array("status" => TRUE));
+        $this->form_validation->set_rules('nome', 'Nome', 'validar_nome');
+        $this->form_validation->set_rules('nome_mae', 'Nome da mãe', 'required');
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+        
+        if ($this->form_validation->run() == FALSE) {
+            $errors = validation_errors();
+            echo json_encode([
+                'error' => $errors
+            ]);
+        } else {
+            $dataPaciente = array(
+                'nome' => $this->input->post('nome'),
+                'nome_mae' => $this->input->post('nome_mae'),
+                'nome_pai' => $this->input->post('nome_pai'),
+                'email' => $this->input->post('email')
+            );
+            
+            $pacienteId = $this->Paciente_model->adicionar_paciente($dataPaciente);
+            
+            $dataEndereco = array(
+                'status' => 1,
+                'paciente_id' => $pacienteId,
+                'nome_bairro' => $this->input->post('nome_bairro'),
+                'rua' => $this->input->post('rua')
+            );
+            $this->Endereco_model->adicionar_endereco($dataEndereco);
+            echo json_encode(array(
+                "status" => TRUE
+            ));
+        }
+    }
+
+    public function atualizarPaciente()
+    {
+        $this->form_validation->set_rules('nome', 'Nome', 'validar_nome');
+        $this->form_validation->set_rules('nome_mae', 'Nome da mãe', 'required');
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+        
+        if ($this->form_validation->run() == FALSE) {
+            $errors = validation_errors();
+            echo json_encode([
+                'error' => $errors
+            ]);
+        } else {
+            $dataPaciente = array(
+                'nome' => $this->input->post('nome'),
+                'nome_mae' => $this->input->post('nome_mae'),
+                'nome_pai' => $this->input->post('nome_pai'),
+                'email' => $this->input->post('email'),
+                'status' => $this->input->post('status')
+            );
+            
+            $this->Paciente_model->atualizar_paciente($this->input->post('paciente_id'), $dataPaciente);
+            
+            $dataEndereco = array(
+                
+                'nome_bairro' => $this->input->post('nome_bairro'),
+                'rua' => $this->input->post('rua')
+            );
+            $this->Endereco_model->atualizar_endereco($this->input->post('endereco_id'), $dataEndereco);
+            echo json_encode(array(
+                "status" => TRUE
+            ));
+        }
     }
 
     public function editarPaciente($id)
     {
         $data = $this->Paciente_model->buscar_paciente($id);
         echo json_encode($data);
+    }
+
+    public function removerPaciente($id)
+    {
+        $this->Paciente_model->remover_paciente($id);
+        echo json_encode(array(
+            "status" => TRUE
+        ));
     }
 }

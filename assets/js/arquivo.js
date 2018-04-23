@@ -1,41 +1,45 @@
 $(document).ready(function() {
 	$('#table_id').DataTable();
-	$( "#tabs" ).tabs();
+	$("#tabs").tabs();
 });
-var save_method; // for save method string
+var save_method;
 var table;
 
-function add_paciente() {
+function adicionar_paciente() {
 	save_method = 'add';
 	$('#form')[0].reset();
 	$('#modal_form').modal('show');
-	$('.modal-title').text('Incluir paciente'); // Set Title to Bootstrap modal
-	// title
+	$('.modal-title').text('Incluir paciente');
+
 }
 
 function editar_paciente(id) {
 	save_method = 'update';
-	$('#form')[0].reset(); // reset form on modals
+	$('#form')[0].reset();
 
-	// Ajax Load data from ajax
 	$.ajax({
 		url : 'cadastro/editarPaciente/' + id,
 		type : "GET",
 		dataType : "JSON",
 		success : function(data) {
 
-			$('[name="id"]').val(data.id);
+			$('[name="paciente_id"]').val(data.paciente_id);
 			$('[name="nome"]').val(data.nome);
 			$('[name="nome_mae"]').val(data.nome_mae);
 			$('[name="nome_pai"]').val(data.nome_pai);
 			$('[name="email"]').val(data.email);
+			$("[name=status]").val([ data.paciente_status ]);
+
+			$('[name="rua"]').val(data.rua);
+			$('[name="nome_bairro"]').val(data.nome_bairro);
+			$('[name="endereco_id"]').val(data.endereco_id);
 
 			$('#modal_form').modal('show');
 			$('.modal-title').text('Atualizar Paciente');
 
 		},
 		error : function(jqXHR, textStatus, errorThrown) {
-			alert('Error get data from ajax');
+			alert('Erro ao editar paciente');
 		}
 	});
 }
@@ -43,33 +47,41 @@ function editar_paciente(id) {
 function save() {
 	var url;
 	if (save_method == 'add') {
-		url = "cadastro/";
+		url = "cadastro/adicionarPaciente";
 	} else {
-		url = "index.php/book/book_update";
+		url = "cadastro/atualizarPaciente";
 	}
 
-	// ajax adding data to database
 	$.ajax({
 		url : url,
 		type : "POST",
 		data : $('#form').serialize(),
 		dataType : "JSON",
 		success : function(data) {
-			// if success close modal and reload ajax table
-			$('#modal_form').modal('hide');
-			location.reload();// for reload a page
+			if ($.isEmptyObject(data.error)) {
+				$(".print-error-msg").css('display', 'none');
+				$('#modal_form').modal('hide');
+				location.reload();
+
+			} else {
+				$(".print-error-msg").css('display', 'block');
+				$(".print-error-msg").html(data.error);
+			}
 		},
 		error : function(jqXHR, textStatus, errorThrown) {
-			alert('Error adding / update data');
+			console.log("Log 1" + JSON.stringify(jqXHR));
+			console.log("Log 2" + textStatus);
+			console.log("Log 3" + errorThrown);
+			alert('Erro ao adicionar ou atualizar paciente');
 		}
 	});
 }
 
-function delete_book(id) {
+function deletar_paciente(id) {
 	if (confirm('Tem certeza que deseja excluir o paciente?')) {
 
 		$.ajax({
-			url : "<?php echo site_url('index.php/book/book_delete')?>/" + id,
+			url : "cadastro/removerPaciente/" + id,
 			type : "POST",
 			dataType : "JSON",
 			success : function(data) {
@@ -77,7 +89,7 @@ function delete_book(id) {
 				location.reload();
 			},
 			error : function(jqXHR, textStatus, errorThrown) {
-				alert('Error deleting data');
+				alert('Erro ao deletar paciente');
 			}
 		});
 
