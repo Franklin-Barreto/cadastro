@@ -59,7 +59,8 @@ class Cadastro extends CI_Controller
         if ($this->form_validation->run() == FALSE) {
             $errors = validation_errors();
             echo json_encode([
-                'error' => $errors
+                'error' => $errors,
+                'status'=>FALSE
             ]);
         } else {
             $dataPaciente = array(
