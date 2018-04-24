@@ -37,14 +37,6 @@ class Cadastro extends CI_Controller
 
     public function index()
     {
-        /*$params['limit'] = RECORDS_PER_PAGE;
-        $params['offset'] = ($this->input->get('per_page')) ? $this->input->get('per_page') : 0;
-        
-        $config = $this->config->item('pagination');
-        $config['base_url'] = site_url('cadastro/index?');
-        $config['total_rows'] = $this->Paciente_model->contar_todos_pacientes();
-        $this->pagination->initialize($config);*/
-        
         $data['pacientes'] = $this->Paciente_model->listar_pacientes();
         
         $this->load->view('cadastro_view', $data);
@@ -52,7 +44,7 @@ class Cadastro extends CI_Controller
 
     public function adicionarPaciente()
     {
-        $this->form_validation->set_rules('nome', 'Nome', 'validar_nome');
+        $this->form_validation->set_rules('nome', 'Nome', 'required|validar_nome');
         $this->form_validation->set_rules('nome_mae', 'Nome da mãe', 'required');
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
         
@@ -87,7 +79,7 @@ class Cadastro extends CI_Controller
 
     public function atualizarPaciente()
     {
-        $this->form_validation->set_rules('nome', 'Nome', 'validar_nome');
+        $this->form_validation->set_rules('nome', 'Nome', 'required|validar_nome');
         $this->form_validation->set_rules('nome_mae', 'Nome da mãe', 'required');
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
         

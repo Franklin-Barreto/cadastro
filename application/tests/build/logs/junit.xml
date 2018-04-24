@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="CodeIgniter Application Test Suite" tests="6" assertions="6" failures="0" errors="0" time="0.319000">
-    <testsuite name="Cadastro_test" file="C:\xampp\htdocs\cadastro\application\tests\controllers\Cadastro_test.php" fullPackage="Cadastro" tests="6" assertions="6" failures="0" errors="0" time="0.319000">
-      <testcase name="test_adicionarPaciente_nome_obrigatorio_falha" class="Cadastro_test" file="C:\xampp\htdocs\cadastro\application\tests\controllers\Cadastro_test.php" line="8" assertions="1" time="0.043000"/>
-      <testcase name="test_adicionarPaciente_tres_letras_iguais_falha" class="Cadastro_test" file="C:\xampp\htdocs\cadastro\application\tests\controllers\Cadastro_test.php" line="15" assertions="1" time="0.027000"/>
-      <testcase name="test_adicionarPaciente__mae_nome_obrigatorio_falha" class="Cadastro_test" file="C:\xampp\htdocs\cadastro\application\tests\controllers\Cadastro_test.php" line="22" assertions="1" time="0.018000"/>
-      <testcase name="test_adicionarPaciente_email_obrigatorio" class="Cadastro_test" file="C:\xampp\htdocs\cadastro\application\tests\controllers\Cadastro_test.php" line="29" assertions="1" time="0.026000"/>
-      <testcase name="test_adicionarPaciente_email_valido_falha" class="Cadastro_test" file="C:\xampp\htdocs\cadastro\application\tests\controllers\Cadastro_test.php" line="36" assertions="1" time="0.029000"/>
-      <testcase name="test_adicionarPaciente_acerto" class="Cadastro_test" file="C:\xampp\htdocs\cadastro\application\tests\controllers\Cadastro_test.php" line="43" assertions="1" time="0.176000"/>
+  <testsuite name="CodeIgniter Application Test Suite" tests="6" assertions="6" failures="0" errors="0" time="0.361000">
+    <testsuite name="Cadastro_test" file="C:\xampp\htdocs\cadastro\application\tests\controllers\Cadastro_test.php" fullPackage="Cadastro" tests="6" assertions="6" failures="0" errors="0" time="0.361000">
+      <testcase name="test_adicionarPaciente_nome_obrigatorio_falha" class="Cadastro_test" file="C:\xampp\htdocs\cadastro\application\tests\controllers\Cadastro_test.php" line="6" assertions="1" time="0.053000"/>
+      <testcase name="test_adicionarPaciente_tres_letras_iguais_falha" class="Cadastro_test" file="C:\xampp\htdocs\cadastro\application\tests\controllers\Cadastro_test.php" line="21" assertions="1" time="0.029000"/>
+      <testcase name="test_adicionarPaciente__mae_nome_obrigatorio_falha" class="Cadastro_test" file="C:\xampp\htdocs\cadastro\application\tests\controllers\Cadastro_test.php" line="36" assertions="1" time="0.027000"/>
+      <testcase name="test_adicionarPaciente_email_obrigatorio" class="Cadastro_test" file="C:\xampp\htdocs\cadastro\application\tests\controllers\Cadastro_test.php" line="51" assertions="1" time="0.027000"/>
+      <testcase name="test_adicionarPaciente_email_valido_falha" class="Cadastro_test" file="C:\xampp\htdocs\cadastro\application\tests\controllers\Cadastro_test.php" line="66" assertions="1" time="0.027000"/>
+      <testcase name="test_adicionarPaciente_acerto" class="Cadastro_test" file="C:\xampp\htdocs\cadastro\application\tests\controllers\Cadastro_test.php" line="79" assertions="1" time="0.198000"/>
     </testsuite>
   </testsuite>
 </testsuites>
